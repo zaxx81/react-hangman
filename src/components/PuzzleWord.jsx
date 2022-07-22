@@ -4,7 +4,7 @@ function PuzzleWord(prop) {
   console.log(prop.word);
 
   for (let i = 0; i < wordLen; i++) {
-    if (prop.guessLetters.includes(prop.word[i])) {
+    if (prop.guessedLetters.includes(prop.word[i])) {
       puzzleText.push(prop.word[i]);
     } else puzzleText.push("_");
   }

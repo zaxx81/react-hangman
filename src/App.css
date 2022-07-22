@@ -45,3 +45,11 @@
   height: 256px;
   background-color: rgb(223, 223, 223);
 }
+
+.lose {
+  background-color: rgb(207, 0, 0);
+}
+
+.win {
+  background-color: rgb(0, 231, 69);
+}

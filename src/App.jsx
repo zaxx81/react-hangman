@@ -1,24 +1,22 @@
 import { useState } from "react";
 import "./App.css";
-import Hangman from "./components/Hangman";
-import PuzzleWord from "./components/PuzzleWord";
-import GuessForm from "./components/GuessForm";
-import IncorrectLetters from "./components/IncorrectLetters";
+import Hangman from "./components/Hangman.jsx";
+import PuzzleWord from "./components/PuzzleWord.jsx";
+import GuessForm from "./components/GuessForm.jsx";
+import IncorrectLetters from "./components/IncorrectLetters.jsx";
 import words from "./data/words.json";
 
 function App() {
   // states
   const [puzzle, setPuzzle] = useState("");
   const [guessedLetters, setGuessedLetters] = useState([]);
+  const [gameStatus, setGameStatus] = useState("playing");
 
   // event handlers
   const handleGuess = (guess) => {
-    if (guess.match(/[a-z]/i)) {
-      const updatedGuessedLetters = [...guessedLetters, guess];
-      setGuessedLetters(updatedGuessedLetters);
-    } else {
-      alert("Only letters, please!");
-    }
+    const updatedGuessedLetters = [...guessedLetters, guess];
+    setGuessedLetters(updatedGuessedLetters);
+    console.log("Guess letter count" + guessedLetters.length);
   };
 
   // other functions
@@ -28,17 +26,38 @@ function App() {
     setPuzzle(randomWord);
   }
 
-  if (puzzle == "") {
+  if (puzzle === "") {
     getPuzzle();
   }
 
+  const gameStatusUpdate = (update) => {
+    if (update === "lose") {
+      setGameStatus("lose");
+    }
+
+    if (update === "win") {
+      setGameStatus("win");
+    }
+  };
+
   return (
     <div className="App">
-      <Hangman />
-      <PuzzleWord word={puzzle} guessLetters={guessedLetters} />
+      <Hangman
+        word={puzzle}
+        guessedLetters={guessedLetters}
+        gameStatus={gameStatus}
+        gameStatusUpdate={gameStatusUpdate}
+      />
+      <PuzzleWord
+        word={puzzle}
+        guessedLetters={guessedLetters}
+        gameStatus={gameStatus}
+        gameStatusUpdate={gameStatusUpdate}
+      />
       <br />
-      <GuessForm clickFunction={handleGuess} />
-      <IncorrectLetters word={puzzle} guessLetters={guessedLetters} />
+      <GuessForm clickFunction={handleGuess} gameStatus={gameStatus} />
+      <br />
+      <IncorrectLetters word={puzzle} guessedLetters={guessedLetters} />
     </div>
   );
 }

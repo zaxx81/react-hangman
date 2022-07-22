@@ -1,12 +1,12 @@
 function IncorrectLetters(props) {
-  let incorrect = props.guessLetters.filter((letter) => {
+  let incorrect = props.guessedLetters.filter((letter) => {
     return !props.word.includes(letter);
   });
 
   return (
     <div>
-      <h1>Incorrect Letters Here</h1>
-      <h2>{incorrect.join(" ")}</h2>
+      <h2>Incorrect Letters Guesses</h2>
+      <h3>{incorrect.join(" ")}</h3>
     </div>
   );
 }
