@@ -1,12 +1,16 @@
-function PuzzleWord(prop) {
-  let wordLen = prop.word.length;
+function PuzzleWord(props) {
+  let wordLen = props.word.length;
   let puzzleText = [];
-  console.log(prop.word);
+  console.log(props.word);
 
   for (let i = 0; i < wordLen; i++) {
-    if (prop.guessedLetters.includes(prop.word[i])) {
-      puzzleText.push(prop.word[i]);
+    if (props.guessedLetters.includes(props.word[i])) {
+      puzzleText.push(props.word[i]);
     } else puzzleText.push("_");
+  }
+
+  if (props.word.toLowerCase() === puzzleText.join("")) {
+    props.gameStatusUpdate("win");
   }
 
   return (

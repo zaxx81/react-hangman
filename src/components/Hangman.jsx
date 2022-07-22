@@ -24,11 +24,27 @@ function Hangman(props) {
     hangman_6,
   ];
 
-  if (hangmanNum < 6) {
+  if (hangmanNum > 5) {
+    props.gameStatusUpdate("lose");
     return (
       <div>
-        <h3>Hangman</h3>
-        <div className="hangingman mx-auto">
+        <h3>Game Over. You lose!</h3>
+        <div className="hangingman lose mx-auto">
+          <img
+            src={currentHangman[hangmanNum]}
+            width="256px"
+            height="256px"
+            alt=""
+          />
+        </div>
+      </div>
+    );
+  }
+  if (props.gameStatus === "win") {
+    return (
+      <div>
+        <h3>Game Over. You Win!</h3>
+        <div className="hangingman win mx-auto">
           <img
             src={currentHangman[hangmanNum]}
             width="256px"
@@ -39,12 +55,10 @@ function Hangman(props) {
       </div>
     );
   } else {
-    props.gameStatusUpdate("lose");
-
     return (
       <div>
-        <h3>Game Over. You lose!</h3>
-        <div className="hangingman lose mx-auto">
+        <h3>Hangman!</h3>
+        <div className="hangingman mx-auto">
           <img
             src={currentHangman[hangmanNum]}
             width="256px"

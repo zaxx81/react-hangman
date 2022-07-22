@@ -9,18 +9,34 @@ function GuessForm(props) {
   const createButton = (text) => {
     let btnID = `button-${text}`;
 
-    return (
-      <div className="btn-group">
-        <button
-          className="btn btn-primary"
-          type="button"
-          id={btnID}
-          onClick={handleGuess}
-        >
-          {text}
-        </button>
-      </div>
-    );
+    if (props.gameStatus === "playing") {
+      return (
+        <div className="btn-group">
+          <button
+            className="btn btn-primary"
+            type="button"
+            id={btnID}
+            onClick={handleGuess}
+          >
+            {text}
+          </button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="btn-group">
+          <button
+            className="btn btn-primary"
+            type="button"
+            id={btnID}
+            onClick={handleGuess}
+            disabled
+          >
+            {text}
+          </button>
+        </div>
+      );
+    }
   };
 
   return (

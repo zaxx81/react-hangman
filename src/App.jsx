@@ -20,14 +20,20 @@ function App() {
   };
 
   // other functions
-  function getPuzzle() {
+  function getPuzzleWord() {
     const wordsLen = words.length;
     let randomWord = words[Math.floor(Math.random() * wordsLen)];
     setPuzzle(randomWord);
+
+    // fetch("https://random-word-api.herokuapp.com/word")
+    //   .then((res) => res.json())
+    //   .then((json) => {
+    //     setPuzzle(json[0]);
+    //   });
   }
 
   if (puzzle === "") {
-    getPuzzle();
+    getPuzzleWord();
   }
 
   const gameStatusUpdate = (update) => {
@@ -55,7 +61,11 @@ function App() {
         gameStatusUpdate={gameStatusUpdate}
       />
       <br />
-      <GuessForm clickFunction={handleGuess} gameStatus={gameStatus} />
+      <GuessForm
+        clickFunction={handleGuess}
+        gameStatus={gameStatus}
+        gameStatusUpdate={gameStatusUpdate}
+      />
       <br />
       <IncorrectLetters word={puzzle} guessedLetters={guessedLetters} />
     </div>
